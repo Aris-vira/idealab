@@ -16,13 +16,15 @@ import { PaletteFavoritesService } from '../core/palette-favorites.service';
       </header>
 
       <div class="mt-8 flex flex-wrap gap-2" role="radiogroup" aria-label="Tipo de armonía">
-        @for (option of schemeOptions; track option.value) {
+        @for (option of schemeOptions; track option.value; let i = $index) {
           <button
             type="button"
             role="radio"
             [attr.aria-checked]="palette().scheme === option.value"
+            [attr.tabindex]="palette().scheme === option.value ? 0 : -1"
             [title]="option.description"
             (click)="selectScheme(option.value)"
+            (keydown)="onRadioKeydown($event, i)"
             class="cursor-pointer rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-ink-200 ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-white/10 hover:ring-white/30 active:scale-95 aria-checked:bg-accent-400 aria-checked:text-on-accent aria-checked:ring-accent-400 aria-checked:hover:bg-accent-300"
           >
             {{ option.label }}
@@ -50,7 +52,7 @@ import { PaletteFavoritesService } from '../core/palette-favorites.service';
 
       <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-between">
         <button type="button" class="btn btn-secondary w-full sm:w-auto" (click)="newPalette()">Nueva paleta</button>
-        <button type="button" class="btn btn-primary w-full sm:w-auto" [disabled]="saved()" (click)="savePalette()">
+        <button type="button" class="btn btn-primary w-full sm:w-auto" [disabled]="saved()" [attr.aria-disabled]="saved()" (click)="savePalette()">
           {{ saved() ? 'Guardada en favoritos' : 'Guardar en favoritos' }}
         </button>
         <button type="button" class="btn btn-secondary w-full sm:w-auto" (click)="copyAll()">Copiar todos los códigos</button>
@@ -83,6 +85,29 @@ export class Palettes {
     this.palette.set(generatePalette(scheme));
     this.copiedColor.set(null);
     this.saved.set(false);
+  }
+
+  protected onRadioKeydown(event: KeyboardEvent, currentIndex: number): void {
+    const lastIndex = this.schemeOptions.length - 1;
+    let nextIndex: number | null = null;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = currentIndex < lastIndex ? currentIndex + 1 : 0;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = currentIndex > 0 ? currentIndex - 1 : lastIndex;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = lastIndex;
+    }
+    if (nextIndex !== null) {
+      event.preventDefault();
+      const next = this.schemeOptions[nextIndex];
+      this.selectScheme(next.value);
+      const btn = document.querySelector<HTMLButtonElement>(
+        `button[role="radio"]:nth-of-type(${nextIndex + 1})`,
+      );
+      btn?.focus();
+    }
   }
 
   protected newPalette(): void {

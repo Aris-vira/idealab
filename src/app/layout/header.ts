@@ -32,7 +32,7 @@ import { ThemeToggle } from './theme-toggle';
                 >
                   {{ link.label }}
                   @if (link.path === '/favoritos' && favorites.count() > 0) {
-                    <span class="rounded-full bg-primary-400 px-2 py-0.5 text-xs font-bold text-on-accent" [attr.aria-label]="favorites.count() + ' ideas guardadas'" role="status">
+                    <span class="rounded-full bg-primary-400 px-2 py-0.5 text-xs font-bold text-on-accent" [attr.aria-label]="favorites.count() + ' ideas guardadas en total'">
                       {{ favorites.count() }}
                     </span>
                   }

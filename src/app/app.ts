@@ -10,7 +10,7 @@ import { Footer } from './layout/footer';
   template: `
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-accent-400 focus:px-5 focus:py-3 focus:font-bold focus:text-on-accent focus:shadow-xl"
     >
       Saltar al contenido
     </a>

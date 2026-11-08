@@ -14,7 +14,7 @@ const DIFFICULTY_CLASSES: Record<Brief['difficulty'], string> = {
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div class="flex items-center gap-3">
           <span class="h-3 w-3 rotate-45 bg-accent-400 transition duration-300 group-hover:rotate-180 group-hover:scale-125" aria-hidden="true"></span>
-          <p class="text-sm font-semibold uppercase tracking-widest text-ink-400">{{ brief().clientType }}</p>
+          <p class="text-sm font-semibold uppercase tracking-widest text-ink-300">{{ brief().clientType }}</p>
         </div>
         <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset {{ difficultyClass() }}" aria-label="Nivel de dificultad: {{ brief().difficultyLabel }}">
           {{ brief().difficultyLabel }}
@@ -23,7 +23,7 @@ const DIFFICULTY_CLASSES: Record<Brief['difficulty'], string> = {
 
       <header>
         <h3 class="font-display text-2xl font-bold text-ink-50 sm:text-3xl">{{ brief().projectName }}</h3>
-        <p class="mt-2 leading-relaxed text-ink-300">{{ brief().description }}</p>
+        <p class="mt-2 leading-relaxed text-ink-200">{{ brief().description }}</p>
       </header>
 
       <section>
@@ -56,7 +56,7 @@ const DIFFICULTY_CLASSES: Record<Brief['difficulty'], string> = {
                 {{ deliverable.name }}
               </p>
               @if (deliverable.detail) {
-                <p class="mt-1 pl-3.5 leading-relaxed text-ink-300">{{ deliverable.detail }}</p>
+                <p class="mt-1 pl-3.5 leading-relaxed text-ink-200">{{ deliverable.detail }}</p>
               }
             </li>
           }

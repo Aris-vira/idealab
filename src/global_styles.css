@@ -258,4 +258,8 @@ html[data-theme="light"] {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  *:hover {
+    transform: none !important;
+  }
 }

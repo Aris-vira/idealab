@@ -46,7 +46,7 @@ type PanelTab = 'gallery' | 'about';
               >
                 <img
                   [src]="imageUrl(photoId)"
-                  [alt]="'Referencia visual de ' + styleName() + ' (imagen ' + ($index() + 1) + ' de ' + ref.photoIds.length + ')'"
+                  [alt]="'Referencia visual de ' + styleName() + ' (imagen ' + (i + 1) + ' de ' + ref.photoIds.length + ')'"
                   loading="lazy"
                   class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-110"
                 />
