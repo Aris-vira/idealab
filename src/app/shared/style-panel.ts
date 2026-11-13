@@ -36,7 +36,7 @@ type PanelTab = 'gallery' | 'about';
             role="region"
             aria-label="Galería de referencias del estilo"
           >
-            @for (photoId of ref.photoIds; track photoId) {
+            @for (photoId of ref.photoIds; track photoId; let i = $index) {
               <a
                 [href]="searchUrl()"
                 target="_blank"
