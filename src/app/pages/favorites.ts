@@ -5,6 +5,7 @@ import { BriefFavoritesService } from '../core/brief-favorites.service';
 import { PaletteFavoritesService } from '../core/palette-favorites.service';
 import { PALETTE_SCHEME_OPTIONS } from '../core/creative-data';
 import { PaletteScheme } from '../core/models';
+import { SoundService } from '../core/sound.service';
 import { IdeaCard } from '../shared/idea-card';
 import { BriefCard } from '../shared/brief-card';
 
@@ -102,17 +103,20 @@ export class Favorites {
   protected readonly favorites = inject(FavoritesService);
   protected readonly briefFavorites = inject(BriefFavoritesService);
   protected readonly palettes = inject(PaletteFavoritesService);
+  private readonly sound = inject(SoundService);
 
   protected remove(id: string): void {
     this.favorites.remove(id);
+    this.sound.playRemove();
   }
 
   protected removeBrief(id: string): void {
     this.briefFavorites.remove(id);
+    this.sound.playRemove();
   }
 
-  protected removePalette(id: string): void {
-    void this.palettes.remove(id);
+  protected async removePalette(id: string): Promise<void> {
+    if (await this.palettes.remove(id)) this.sound.playRemove();
   }
 
   protected schemeLabel(scheme: PaletteScheme): string {

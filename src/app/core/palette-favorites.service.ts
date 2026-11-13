@@ -65,13 +65,14 @@ export class PaletteFavoritesService {
     return true;
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: string): Promise<boolean> {
     const { error } = await supabase.from('favorite_palettes').delete().eq('id', id);
     if (error) {
       this.error.set('No se pudo eliminar la paleta. Inténtalo de nuevo.');
-      return;
+      return false;
     }
     this.error.set(null);
     this.palettes.update((list) => list.filter((palette) => palette.id !== id));
+    return true;
   }
 }

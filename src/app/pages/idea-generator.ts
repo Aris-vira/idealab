@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FavoritesService } from '../core/favorites.service';
 import { BriefFavoritesService } from '../core/brief-favorites.service';
+import { SoundService } from '../core/sound.service';
 import { randomIdea } from '../core/idea-generator';
 import { randomBrief } from '../core/brief-generator';
 import { Brief, Idea } from '../core/models';
@@ -91,6 +92,7 @@ type GeneratorMode = 'inspiration' | 'brief';
 export class IdeaGenerator {
   private readonly favorites = inject(FavoritesService);
   private readonly briefFavorites = inject(BriefFavoritesService);
+  private readonly sound = inject(SoundService);
 
   protected readonly modes: readonly { value: GeneratorMode; label: string }[] = [
     { value: 'inspiration', label: 'Inspiración creativa' },
@@ -137,8 +139,10 @@ export class IdeaGenerator {
     const current = this.idea();
     if (this.favorites.isSaved(current.id)) {
       this.favorites.remove(current.id);
+      this.sound.playRemove();
     } else {
       this.favorites.save(current);
+      this.sound.playSave();
     }
   }
 
@@ -150,8 +154,10 @@ export class IdeaGenerator {
     const current = this.brief();
     if (this.briefFavorites.isSaved(current.id)) {
       this.briefFavorites.remove(current.id);
+      this.sound.playRemove();
     } else {
       this.briefFavorites.save(current);
+      this.sound.playSave();
     }
   }
 }

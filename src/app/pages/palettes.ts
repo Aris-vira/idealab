@@ -3,6 +3,7 @@ import { generatePalette, readableTextColor } from '../core/palette-generator';
 import { PALETTE_SCHEME_OPTIONS } from '../core/creative-data';
 import { Palette, PaletteScheme } from '../core/models';
 import { PaletteFavoritesService } from '../core/palette-favorites.service';
+import { SoundService } from '../core/sound.service';
 
 @Component({
   selector: 'app-palettes',
@@ -69,6 +70,7 @@ export class Palettes {
   protected readonly status = signal('');
   protected readonly saved = signal(false);
   private readonly favorites = inject(PaletteFavoritesService);
+  private readonly sound = inject(SoundService);
 
   private readonly failureMessage = 'No se pudo copiar automáticamente. Selecciona el código manualmente.';
   private statusTimer: ReturnType<typeof setTimeout> | undefined;
@@ -121,6 +123,7 @@ export class Palettes {
     const ok = await this.favorites.save(this.palette());
     if (ok) {
       this.saved.set(true);
+      this.sound.playSave();
       this.announce('Paleta guardada en favoritos.');
     } else {
       this.announce(this.favorites.error() ?? 'No se pudo guardar la paleta.');
