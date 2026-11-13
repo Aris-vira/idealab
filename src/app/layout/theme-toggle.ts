@@ -8,7 +8,7 @@ import { ThemeService } from '../core/theme.service';
       type="button"
       role="switch"
       [attr.aria-checked]="isLight()"
-      [attr.aria-label]="isLight() ? 'Activar modo oscuro' : 'Activar modo claro'"
+      aria-label="Modo claro"
       (click)="toggle()"
       class="group relative inline-flex h-9 w-16 shrink-0 cursor-pointer items-center rounded-full bg-white/10 ring-1 ring-white/15 transition duration-300 hover:ring-white/30 active:scale-95"
     >

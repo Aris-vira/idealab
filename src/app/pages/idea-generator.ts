@@ -40,16 +40,17 @@ type GeneratorMode = 'inspiration' | 'brief';
         }
       </div>
 
+      <div role="tabpanel" [attr.aria-labelledby]="'gen-tab-' + mode()">
       @if (mode() === 'inspiration') {
         @for (item of [idea()]; track item.id) {
           <app-idea-card [idea]="item">
             <button type="button" class="btn btn-primary w-full sm:w-auto" (click)="generate()">Generar otra propuesta</button>
             @if (isIdeaSaved()) {
-              <button type="button" class="btn btn-danger w-full sm:w-auto" [attr.aria-pressed]="true" (click)="toggleIdeaFavorite()">
+              <button type="button" class="btn btn-danger w-full sm:w-auto" (click)="toggleIdeaFavorite()">
                 Quitar de favoritos
               </button>
             } @else {
-              <button type="button" class="btn btn-secondary w-full sm:w-auto" [attr.aria-pressed]="false" (click)="toggleIdeaFavorite()">
+              <button type="button" class="btn btn-secondary w-full sm:w-auto" (click)="toggleIdeaFavorite()">
                 Guardar en favoritos
               </button>
             }
@@ -66,11 +67,11 @@ type GeneratorMode = 'inspiration' | 'brief';
           <app-brief-card [brief]="item">
             <button type="button" class="btn btn-primary w-full sm:w-auto" (click)="generateBrief()">Generar otro brief</button>
             @if (isBriefSaved()) {
-              <button type="button" class="btn btn-danger w-full sm:w-auto" [attr.aria-pressed]="true" (click)="toggleBriefFavorite()">
+              <button type="button" class="btn btn-danger w-full sm:w-auto" (click)="toggleBriefFavorite()">
                 Quitar de favoritos
               </button>
             } @else {
-              <button type="button" class="btn btn-secondary w-full sm:w-auto" [attr.aria-pressed]="false" (click)="toggleBriefFavorite()">
+              <button type="button" class="btn btn-secondary w-full sm:w-auto" (click)="toggleBriefFavorite()">
                 Guardar en favoritos
               </button>
             }
@@ -83,6 +84,7 @@ type GeneratorMode = 'inspiration' | 'brief';
           }
         </p>
       }
+      </div>
     </section>
   `,
 })

@@ -36,7 +36,7 @@ import { PaletteFavoritesService } from '../core/palette-favorites.service';
         @for (color of palette().colors; track $index) {
           <button
             type="button"
-            class="group relative flex min-h-28 flex-1 cursor-pointer flex-col justify-end gap-1 p-5 text-left transition-[flex-grow,filter] duration-500 ease-out hover:brightness-105 sm:min-h-0 sm:hover:flex-[1.35]"
+            class="group relative flex min-h-28 flex-1 cursor-pointer flex-col justify-end gap-1 p-5 text-left transition-[flex-grow,filter] duration-500 ease-out hover:brightness-105 focus-visible:-outline-offset-4 sm:min-h-0 sm:hover:flex-[1.35]"
             [style.background-color]="color"
             [style.color]="textColor(color)"
             [attr.aria-label]="'Copiar color ' + color"

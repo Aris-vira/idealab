@@ -20,7 +20,7 @@ import { BriefCard } from '../shared/brief-card';
             Las ideas que guardaste se mantienen en este navegador.
           </p>
         </div>
-        <p class="text-sm font-semibold text-ink-300">
+        <p class="text-sm font-semibold text-ink-300" aria-live="polite">
           {{ favorites.count() }} {{ favorites.count() === 1 ? 'idea guardada' : 'ideas guardadas' }}
         </p>
       </header>
@@ -39,7 +39,7 @@ import { BriefCard } from '../shared/brief-card';
           @for (idea of favorites.favorites(); track idea.id; let i = $index) {
             <div class="animate-fade-up" [style.animation-delay.ms]="i * 60">
               <app-idea-card [idea]="idea">
-                <button type="button" class="btn btn-danger" (click)="remove(idea.id)">Eliminar</button>
+                <button type="button" class="btn btn-danger" [attr.aria-label]="'Eliminar idea ' + idea.concept" (click)="remove(idea.id)">Eliminar</button>
               </app-idea-card>
             </div>
           }
@@ -58,7 +58,7 @@ import { BriefCard } from '../shared/brief-card';
           <div class="mt-6 grid gap-6 md:grid-cols-2">
             @for (brief of briefFavorites.briefs(); track brief.id) {
               <app-brief-card [brief]="brief">
-                <button type="button" class="btn btn-danger" (click)="removeBrief(brief.id)">Eliminar</button>
+                <button type="button" class="btn btn-danger" [attr.aria-label]="'Eliminar brief ' + brief.projectName" (click)="removeBrief(brief.id)">Eliminar</button>
               </app-brief-card>
             }
           </div>
@@ -88,7 +88,7 @@ import { BriefCard } from '../shared/brief-card';
                     <p class="text-sm font-semibold text-ink-200">{{ schemeLabel(palette.scheme) }}</p>
                     <p class="font-display text-sm text-ink-400">{{ palette.colors.join(' · ') }}</p>
                   </div>
-                  <button type="button" class="btn btn-danger" (click)="removePalette(palette.id)">Eliminar</button>
+                  <button type="button" class="btn btn-danger" [attr.aria-label]="'Eliminar paleta ' + palette.colors.join(', ')" (click)="removePalette(palette.id)">Eliminar</button>
                 </div>
               </article>
             }

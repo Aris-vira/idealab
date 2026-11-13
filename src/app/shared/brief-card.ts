@@ -2,9 +2,9 @@ import { Component, computed, input } from '@angular/core';
 import { Brief } from '../core/models';
 
 const DIFFICULTY_CLASSES: Record<Brief['difficulty'], string> = {
-  basico: 'bg-success-500/15 text-success-300 ring-success-400/30',
-  intermedio: 'bg-warning-500/15 text-warning-300 ring-warning-400/30',
-  avanzado: 'bg-error-500/15 text-error-300 ring-error-400/30',
+  basico: 'bg-success-500/15 text-tone-success ring-success-400/30',
+  intermedio: 'bg-warning-500/15 text-tone-warning ring-warning-400/30',
+  avanzado: 'bg-error-500/15 text-tone-error ring-error-400/30',
 };
 
 @Component({
@@ -16,9 +16,10 @@ const DIFFICULTY_CLASSES: Record<Brief['difficulty'], string> = {
           <span class="h-3 w-3 rotate-45 bg-accent-400 transition duration-300 group-hover:rotate-180 group-hover:scale-125" aria-hidden="true"></span>
           <p class="text-sm font-semibold uppercase tracking-widest text-ink-300">{{ brief().clientType }}</p>
         </div>
-        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset {{ difficultyClass() }}" aria-label="Nivel de dificultad: {{ brief().difficultyLabel }}">
+        <p class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset {{ difficultyClass() }}">
+          <span class="sr-only">Nivel de dificultad:</span>
           {{ brief().difficultyLabel }}
-        </span>
+        </p>
       </div>
 
       <header>

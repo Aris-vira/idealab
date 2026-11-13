@@ -27,13 +27,15 @@ import { ThemeToggle } from './theme-toggle';
                 <a
                   [routerLink]="link.path"
                   routerLinkActive
+                  ariaCurrentWhenActive="page"
                   [routerLinkActiveOptions]="{ exact: link.exact }"
                   class="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold whitespace-nowrap text-ink-200 transition duration-200 hover:-translate-y-px hover:bg-white/10 hover:text-ink-50 active:scale-95 sm:px-4 aria-[current=page]:bg-ink-50 aria-[current=page]:text-ink-950 aria-[current=page]:hover:bg-ink-100"
                 >
                   {{ link.label }}
                   @if (link.path === '/favoritos' && favorites.count() > 0) {
-                    <span class="rounded-full bg-primary-400 px-2 py-0.5 text-xs font-bold text-on-accent" [attr.aria-label]="favorites.count() + ' ideas guardadas en total'">
-                      {{ favorites.count() }}
+                    <span class="rounded-full bg-primary-400 px-2 py-0.5 text-xs font-bold text-on-accent">
+                      <span class="sr-only">({{ favorites.count() }} ideas guardadas)</span>
+                      <span aria-hidden="true">{{ favorites.count() }}</span>
                     </span>
                   }
                 </a>

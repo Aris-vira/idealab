@@ -8,7 +8,7 @@ type PanelTab = 'gallery' | 'about';
   template: `
     <section class="overflow-hidden rounded-2xl bg-[#0e3d38] p-4 text-[#eef9f7] shadow-lg shadow-black/30 ring-1 ring-[#6fcbbb]/30 sm:p-5">
       <p class="text-xs font-semibold uppercase tracking-widest text-[#6fcbbb]">Estilo visual</p>
-      <h4 class="mt-1 font-display text-xl font-bold tracking-tight text-[#eef9f7] sm:text-2xl">{{ styleName() }}</h4>
+      <h3 class="mt-1 font-display text-xl font-bold tracking-tight text-[#eef9f7] sm:text-2xl">{{ styleName() }}</h3>
 
       <div role="tablist" aria-label="Secciones del estilo" class="mt-4 inline-flex rounded-full bg-black/25 p-1 ring-1 ring-[#6fcbbb]/25">
         @for (option of tabs; track option.value; let i = $index) {
@@ -31,10 +31,10 @@ type PanelTab = 'gallery' | 'about';
       @if (reference(); as ref) {
         @if (tab() === 'gallery') {
           <div
-            class="mt-4 grid max-h-56 grid-cols-2 gap-2 overflow-y-auto pr-1 md:grid-cols-3"
+            role="tabpanel"
+            aria-labelledby="style-tab-gallery"
+            class="mt-4 grid max-h-56 grid-cols-2 gap-2 overflow-y-auto p-1 md:grid-cols-3"
             tabindex="0"
-            role="region"
-            aria-label="Galería de referencias del estilo"
           >
             @for (photoId of ref.photoIds; track photoId; let i = $index) {
               <a
@@ -54,13 +54,13 @@ type PanelTab = 'gallery' | 'about';
             }
           </div>
         } @else {
-          <div class="mt-4 grid gap-4 text-sm text-[#eef9f7] sm:grid-cols-2">
+          <div class="mt-4 grid gap-4 text-sm text-[#eef9f7] sm:grid-cols-2" role="tabpanel" aria-labelledby="style-tab-about">
             <div>
-              <h5 class="text-sm font-semibold uppercase tracking-wider text-[#6fcbbb]">Características</h5>
+              <h4 class="text-sm font-semibold uppercase tracking-wider text-[#6fcbbb]">Características</h4>
               <p class="mt-2 leading-relaxed">{{ ref.description }}</p>
             </div>
             <div>
-              <h5 class="text-sm font-semibold uppercase tracking-wider text-[#6fcbbb]">Elementos principales</h5>
+              <h4 class="text-sm font-semibold uppercase tracking-wider text-[#6fcbbb]">Elementos principales</h4>
               <ul class="mt-2 list-disc space-y-1 pl-5 leading-relaxed">
                 @for (element of ref.elements; track element) {
                   <li>{{ element }}</li>
@@ -68,7 +68,7 @@ type PanelTab = 'gallery' | 'about';
               </ul>
             </div>
             <div class="sm:col-span-2">
-              <h5 class="text-sm font-semibold uppercase tracking-wider text-[#6fcbbb]">Colores</h5>
+              <h4 class="text-sm font-semibold uppercase tracking-wider text-[#6fcbbb]">Colores</h4>
               <ul class="mt-3 flex flex-wrap gap-3">
                 @for (color of ref.colors; track color) {
                   <li class="flex items-center gap-2 rounded-full bg-black/25 py-1 pl-1 pr-3 text-sm font-semibold">
